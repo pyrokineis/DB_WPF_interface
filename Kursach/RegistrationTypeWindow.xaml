@@ -1,0 +1,16 @@
+﻿<Window x:Class="Kursach.RegistrationTypeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach"
+        mc:Ignorable="d"
+        Title="RegistrationTypeWindow" Height="Auto" Width="250">
+    <Grid>
+        <StackPanel Height="Auto" Width="Auto">
+            <RadioButton Name="RB_Client" Content="Зарегистрироваться как Клиент" Checked="RB_Client_Checked"/>
+            <RadioButton Name="RB_Driver" Content="Зарегистрироваться как Водитель" Checked="RB_Driver_Checked"/>
+            <Button Name="RTW_Back_Click"  Content="Назад" Width="766" Click="RTW_Back_Click_1" HorizontalContentAlignment="Left" />
+        </StackPanel>
+    </Grid>
+</Window>

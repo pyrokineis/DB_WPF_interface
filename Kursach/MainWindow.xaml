@@ -1,0 +1,18 @@
+﻿<Window x:Class="Kursach.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach"
+        mc:Ignorable="d"
+        Title="LogIn Window" Height="300" Width="300" Loaded="Window_Loaded">
+    <Grid>
+        <TextBox x:Name="TBoxLog" HorizontalAlignment="Left" Margin="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <PasswordBox x:Name="TBoxPass" HorizontalAlignment="Left" Margin="140,30,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnEnter" Content="Login" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Click="btnEnter_Click"/>
+        <Button x:Name="btnCancel" Content="Close" HorizontalAlignment="Left" Margin="256,154,0,0" VerticalAlignment="Top" Click="btnCancel_Click" />
+        <Button x:Name="btnRegister" Content="Зарегестрироваться" HorizontalAlignment="Left" Margin="90,154,0,0" VerticalAlignment="Top" Click="btnRegister_Click"/>
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,47 @@
+﻿<Window x:Class="Kursach.RegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach"
+        mc:Ignorable="d"
+        Title="RegistrationWindow" Height="Auto" Width="500">
+    <Grid>
+        <Grid Name="Driver_Grid" Visibility="Hidden" >
+            <StackPanel >
+                <Label Content="Введите ФИО"/>
+                <TextBox Name="DriverFIO_TB" Text="lala"/>
+                <Label Content="Введите номер телефона"/>
+                <TextBox Name="DriverPhone_TB" Text="lala"/>
+                <Label Content="Укажите марку и модель машины"/>
+                <TextBox/>
+                <Label Content="Укажите номерной знак авто в формате аа000а "/>
+                <TextBox Name="CarPlate_TB" Text="lala"/>
+                <Label Content="Укажите номер страховки в формате 00 00 000000"/>
+                <TextBox Name="CarLicense_TB" Text="lala"/>
+                <Label/>
+                <Button Name="Driver_Register_Button" Content="Зарегестрироваться" />
+                <Button Name="Driver_Back_Button" Content="Назад"/>
+            </StackPanel>
+        </Grid>
+        <Grid Name="Client_Grid" Visibility="Visible">
+
+            <StackPanel>
+                <Label Content="Введите ФИО"/>
+                <TextBox Name="ClientFIO_TB" Text="lala"/>
+                <Label Content="Введите номер телефона"/>
+                <TextBox Name="ClientPhone_TB" Text="lala"/>
+                <Label Content="Укажите возраст"/>
+                <TextBox Name="ClientAge_TB" Text="lalala"/>
+                <Label/>
+                <Button Name="Client_Register_Button" Content="Зарегестрироваться" />
+                <Button Name="Client_Back_Button" Content="Назад"/>
+                <TextBox/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+       
+   
+
+</Window>
