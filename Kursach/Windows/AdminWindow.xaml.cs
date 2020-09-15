@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using Kursach.Windows;
 
 namespace Kursach
 {
@@ -23,7 +24,7 @@ namespace Kursach
         public MainWindow mainWindow {get; set;}
         public SqlConnection connect { get; set; }
 
-        SqlCommand  cmnd, cmndFind;
+        SqlCommand  cmnd, cmndFind, cmndReport;
         SqlDataAdapter adapter=new SqlDataAdapter();
         DataTable DT;
         ComboBoxItem CBi;
@@ -66,7 +67,6 @@ namespace Kursach
             try 
             {
                 adapter.Update(DT);
-                //adapter.Fill(DT);
                 ADataGrid.ItemsSource = DT.DefaultView;
             }
 
@@ -135,25 +135,25 @@ namespace Kursach
                         adapter.SelectCommand = new SqlCommand("select * from Driver (Driver_ID, D_Full_name, Auto_model, Auto_plate, D_Phone_number,Licence_number)", connect);
 
                         //ins
-                        cmnd = new SqlCommand("insert into Driver (Driver_ID, D_Full_name, Auto_model, Auto_plate, D_Phone_number,Licence_number) values " +
-                            "(@Driver_ID, @D_Full_name, @Auto_model, @Auto_plate, @D_Phone_number, @Licence_number)", connect);
-                        cmnd.Parameters.Add("@Driver_ID",SqlDbType.Int,6,"Driver_ID");
+                        cmnd = new SqlCommand("insert into Driver (D_Full_name, Auto_model, Auto_plate, D_Phone_number,Licence_number) values " +
+                            "(@D_Full_name, @Auto_model, @Auto_plate, @D_Phone_number, @Licence_number)", connect);
+                      //  cmnd.Parameters.Add("@Driver_ID",SqlDbType.Int,6,"Driver_ID");
                         cmnd.Parameters.Add("@D_Full_name",SqlDbType.NVarChar,100, "D_Full_name");
                         cmnd.Parameters.Add("@Auto_model",SqlDbType.NVarChar,100, "Auto_model");
-                        cmnd.Parameters.Add("@Auto_plate",SqlDbType.NVarChar,100, "Auto_plate");
-                        cmnd.Parameters.Add("@D_Phone_number", SqlDbType.NVarChar, 100, "D_Phone_number");
-                        cmnd.Parameters.Add("@Licence_number", SqlDbType.NVarChar, 100, "Licence_number");
+                        cmnd.Parameters.Add("@Auto_plate",SqlDbType.NVarChar,10, "Auto_plate");
+                        cmnd.Parameters.Add("@D_Phone_number", SqlDbType.NVarChar, 20, "D_Phone_number");
+                        cmnd.Parameters.Add("@Licence_number", SqlDbType.NVarChar, 20, "Licence_number");
                         adapter.InsertCommand = cmnd;
 
                         //upd
-                        cmnd = new SqlCommand("update Driver set Driver_ID=@Driver_ID, D_Full_name=@D_Full_name, Auto_model=@Auto_model, Auto_plate=@Auto_plate, D_Phone_number=@D_Phone_number, Licence_number=@Licence_number where Driver_ID=@prevDriver_ID",connect);
+                        cmnd = new SqlCommand("update Driver set D_Full_name=@D_Full_name, Auto_model=@Auto_model, Auto_plate=@Auto_plate, D_Phone_number=@D_Phone_number, Licence_number=@Licence_number where Driver_ID=@prevDriver_ID",connect);
 
-                        cmnd.Parameters.Add("@Driver_ID", SqlDbType.Int, 6, "Driver_ID");
+                        //cmnd.Parameters.Add("@Driver_ID", SqlDbType.Int, 6, "Driver_ID");
                         cmnd.Parameters.Add("@D_Full_name", SqlDbType.NVarChar, 100, "D_Full_name");
                         cmnd.Parameters.Add("@Auto_model", SqlDbType.NVarChar, 100, "Auto_model");
-                        cmnd.Parameters.Add("@Auto_plate", SqlDbType.NVarChar, 100, "Auto_plate");
-                        cmnd.Parameters.Add("@D_Phone_number", SqlDbType.NVarChar, 100, "D_Phone_number");
-                        cmnd.Parameters.Add("@Licence_number", SqlDbType.NVarChar, 100, "Licence_number");
+                        cmnd.Parameters.Add("@Auto_plate", SqlDbType.NVarChar, 10, "Auto_plate");
+                        cmnd.Parameters.Add("@D_Phone_number", SqlDbType.NVarChar, 20, "D_Phone_number");
+                        cmnd.Parameters.Add("@Licence_number", SqlDbType.NVarChar, 20, "Licence_number");
                         SqlParameter parameter = cmnd.Parameters.Add("@prevDriver_ID", SqlDbType.Int, 6, "Driver_ID");
                         parameter.SourceVersion = DataRowVersion.Original;
                         adapter.UpdateCommand = cmnd;
@@ -172,21 +172,21 @@ namespace Kursach
                         adapter.SelectCommand = new SqlCommand("select * from Client (Client_ID, C_Full_name, C_Age, C_Phone_number)", connect);
 
                         //ins
-                        cmnd = new SqlCommand("insert into Client (Client_ID, C_Full_name, C_Age, C_Phone_number) values " +
-                            "(@Client_ID, @C_Full_name,C_Age, @C_Phone_number)", connect);
-                        cmnd.Parameters.Add("@Client_ID", SqlDbType.Int, 6, "Client_ID");
-                        cmnd.Parameters.Add("@C_Full_name", SqlDbType.NVarChar, 100, "C_Full_name");
+                        cmnd = new SqlCommand("insert into Client (C_Full_name, C_Age, C_Phone_number) values " +
+                            "(@C_Full_name, @C_Age, @C_Phone_number)", connect);
+                        //cmnd.Parameters.Add("@Client_ID", SqlDbType.Int, 6, "Client_ID");
+                        cmnd.Parameters.Add("@C_Full_name", SqlDbType.NVarChar, 70, "C_Full_name");
                         cmnd.Parameters.Add("@C_Age",SqlDbType.Int,6,"C_Age");
-                        cmnd.Parameters.Add("@C_Phone_number", SqlDbType.NVarChar, 100, "C_Phone_number");
+                        cmnd.Parameters.Add("@C_Phone_number", SqlDbType.NVarChar, 20, "C_Phone_number");
                        
                         adapter.InsertCommand = cmnd;
 
                         //upd
-                        cmnd = new SqlCommand("update Client set Client_ID=@Client_ID, C_Full_name=@C_Full_name, C_Age=@C_Age, C_Phone_number=@C_Phone_number where Client_ID=@prevClient_ID", connect);
-                        cmnd.Parameters.Add("@Client_ID", SqlDbType.Int, 6, "Client_ID");
-                        cmnd.Parameters.Add("@C_Full_name", SqlDbType.NVarChar, 100, "C_Full_name");
+                        cmnd = new SqlCommand("update Client set C_Full_name=@C_Full_name, C_Age=@C_Age, C_Phone_number=@C_Phone_number where Client_ID=@prevClient_ID", connect);
+                        //cmnd.Parameters.Add("@Client_ID", SqlDbType.Int, 6, "Client_ID");
+                        cmnd.Parameters.Add("@C_Full_name", SqlDbType.NVarChar, 70, "C_Full_name");
                         cmnd.Parameters.Add("@C_Age", SqlDbType.Int, 6, "C_Age");
-                        cmnd.Parameters.Add("@C_Phone_number", SqlDbType.NVarChar, 100, "C_Phone_number");
+                        cmnd.Parameters.Add("@C_Phone_number", SqlDbType.NVarChar, 20, "C_Phone_number");
                         SqlParameter parameter = cmnd.Parameters.Add("@prevClient_ID", SqlDbType.Int, 6, "Client_ID");
                         parameter.SourceVersion = DataRowVersion.Original;
                         adapter.UpdateCommand = cmnd;
@@ -205,17 +205,17 @@ namespace Kursach
                         adapter.SelectCommand = new SqlCommand("select * from ExrtaServises (Servise_ID,Servise_Name,Servise_Surcharge)", connect);
 
                         //ins
-                        cmnd = new SqlCommand("insert into ExtraServises (Servise_ID,Servise_Name,Servise_Surcharge) values (@Servise_ID,@Servise_Name,@Servise_Surcharge)",connect);
-                        cmnd.Parameters.Add("@Servise_ID",SqlDbType.Int,6, "Servise_ID");
-                        cmnd.Parameters.Add("@Servise_Name",SqlDbType.NVarChar,100, "@Servise_Name");
-                        cmnd.Parameters.Add("@Servise_Surcharge",SqlDbType.NVarChar,100, "@Servise_SUrcharge");
+                        cmnd = new SqlCommand("insert into ExtraServises (Servise_Name, Servise_Surcharge) values (@Servise_Name, @Servise_Surcharge)",connect);
+                        //cmnd.Parameters.Add("@Servise_ID",SqlDbType.Int,6, "Servise_ID");
+                        cmnd.Parameters.Add("@Servise_Name",SqlDbType.NVarChar,50, "@Servise_Name");
+                        cmnd.Parameters.Add("@Servise_Surcharge",SqlDbType.Int,6, "@Servise_Surcharge");
                         adapter.InsertCommand = cmnd;
 
                         //update
-                        cmnd = new SqlCommand("update ExtraServises set Servise_ID=@Servise_ID, Servise_Name=@Servise_Name, Servise_Surcharge=@Servise_Surcharge where prevServise_ID=@Servise_ID",connect);
-                        cmnd.Parameters.Add("@Servise_ID", SqlDbType.Int, 6, "Servise_ID");
-                        cmnd.Parameters.Add("@Servise_Name", SqlDbType.NVarChar, 100, "@Servise_Name");
-                        cmnd.Parameters.Add("@Servise_Surcharge", SqlDbType.NVarChar, 100, "@Servise_SUrcharge");
+                        cmnd = new SqlCommand("update ExtraServises set Servise_Name=@Servise_Name, Servise_Surcharge=@Servise_Surcharge where @prevServise_ID=Servise_ID",connect);
+                        //cmnd.Parameters.Add("@Servise_ID", SqlDbType.Int, 6, "Servise_ID");
+                        cmnd.Parameters.Add("@Servise_Name", SqlDbType.NVarChar, 50, "@Servise_Name");
+                        cmnd.Parameters.Add("@Servise_Surcharge", SqlDbType.Int, 6, "@Servise_Surcharge");
                         SqlParameter parameter = cmnd.Parameters.Add("prevServise_ID", SqlDbType.Int,6,"Servise_ID");
                         parameter.SourceVersion = DataRowVersion.Original;
                         adapter.UpdateCommand = cmnd;
@@ -261,14 +261,14 @@ namespace Kursach
                         //select
                         adapter.SelectCommand = new SqlCommand("seleсt * from AutoClass(Class_ID,Class_Name,Coef)",connect);
                         //ins
-                        cmnd = new SqlCommand("insert into AutoClass (Class_ID,Class_Name,Coef) values (@Class_ID, @Class_name, @Coef)", connect);
-                        cmnd.Parameters.Add("@Class_ID",SqlDbType.Int,6, "Class_ID");
+                        cmnd = new SqlCommand("insert into AutoClass (Class_Name,Coef) values (@Class_name, @Coef)", connect);
+                        //cmnd.Parameters.Add("@Class_ID",SqlDbType.Int,6, "Class_ID");
                         cmnd.Parameters.Add("@Class_Name",SqlDbType.NVarChar,20, "Class_Name");
                         cmnd.Parameters.Add("Coef",SqlDbType.Int,6, "@Coef");
                         adapter.InsertCommand = cmnd;
                         //upd
-                        cmnd = new SqlCommand("update AutoClass set Class_ID=@Class_ID, Class_Name=@Class_Name, Coef=@Coef where prevClass_ID=@Class_ID", connect);
-                        cmnd.Parameters.Add("@Class_ID", SqlDbType.Int, 6, "Class_ID");
+                        cmnd = new SqlCommand("update AutoClass set Class_Name=@Class_Name, Coef=@Coef where @prevClass_ID=Class_ID", connect);
+                       // cmnd.Parameters.Add("@Class_ID", SqlDbType.Int, 6, "Class_ID");
                         cmnd.Parameters.Add("@Class_Name", SqlDbType.NVarChar, 20, "Class_Name");
                         cmnd.Parameters.Add("@Coef", SqlDbType.Int, 6, "Coef");
                         SqlParameter parameter = cmnd.Parameters.Add("@prevClass_ID",SqlDbType.Int,6, "Class_ID");
@@ -288,7 +288,7 @@ namespace Kursach
         }
         private void CDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Btn_AddRow.IsEnabled = true;
+         
             Btn_DeleteRow.IsEnabled = true;
         }
 
@@ -310,7 +310,6 @@ namespace Kursach
                         adapter.Fill(DT);
                         ADataGrid.ItemsSource = DT.DefaultView;
                         AdapterSettingsSet(CBi, connect);
-               
 
                     }
                     break;
@@ -378,13 +377,13 @@ namespace Kursach
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton RBChecked = (RadioButton)sender;
-            rbText = RBChecked.Name.ToString();
+            rbText = RBChecked.Content.ToString();
         }
 
         private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
         {
             RadioButton RBChecked = (RadioButton)sender;
-            rbText = RBChecked.Name.ToString();
+            rbText = RBChecked.Content.ToString();
         }
 
         private void Btn_Find_Click(object sender, RoutedEventArgs e)
@@ -615,10 +614,7 @@ namespace Kursach
             }
             TB_Search.Text = null;
         }
-        private void Btn_AddRow_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+     
 
         private void Btn_DeleteRow_Click(object sender, RoutedEventArgs e)
         {
@@ -646,17 +642,115 @@ namespace Kursach
            {
                 if (TB_Report.Text!=null)
                 {
+                    try
+                    {
+                        int ReportID = int.Parse(TB_Report.Text.ToString());
+                    }
+
+                    catch
+                    {
+                        MessageBox.Show("Введите целое число");
+                        return;
+                    }
+
+                    ReportWindow RW = new ReportWindow();
                     switch (rbText)
                     {
                         case "Client":
                             {
+                               
+
+                                cmndReport = new SqlCommand("select count(Rides_ID) from Rides where ClientID=@ClientID",connect);
+                                SqlParameter param = new SqlParameter();
+                                param.ParameterName = "@ClientID";
+                                param.Value = int.Parse(TB_Report.Text.ToString());
+                                cmndReport.Parameters.Add(param);
+                                SqlDataReader reader = cmndReport.ExecuteReader();
+                                while(reader.Read())
+                                {
+                                    object num = reader.GetValue(0);
+                                    RW.RidesCount = int.Parse(num.ToString());
+                                    
+                                }
+                                reader.Close();
+
+                                cmndReport = new SqlCommand("select sum(Distance) from Rides where ClientID=@ClientID",connect);
+                                param = new SqlParameter();
+                                param.ParameterName = "@ClientID";
+                                param.Value = int.Parse(TB_Report.Text.ToString());
+                                cmndReport.Parameters.Add(param);
+                                reader = cmndReport.ExecuteReader();
+                                while (reader.Read())
+                                {
+                                    object num = reader.GetValue(0);
+                                    RW.DistanceSum = double.Parse(num.ToString());
+                           
+
+                                }
+                                reader.Close();
+
+
+                                cmndReport = new SqlCommand("select sum(Summary) from Rides where ClientID=@ClientID",connect);
+                                param = new SqlParameter();
+                                param.ParameterName = "@ClientID";
+                                param.Value = int.Parse(TB_Report.Text.ToString());
+                                cmndReport.Parameters.Add(param);
+                                reader = cmndReport.ExecuteReader();
+                                while (reader.Read())
+                                {
+                                    object num = reader.GetValue(0);
+                                    RW.Sum = int.Parse(num.ToString());
+
+                                }
+                                reader.Close();
 
                             }
                             break;
 
+
                         case "Driver":
                             {
+                                cmndReport = new SqlCommand("select count(Rides_ID) from Rides where DriverID=@DriverID",connect);
+                                SqlParameter param = new SqlParameter();
+                                param.ParameterName = "@DriverID";
+                                param.Value = int.Parse(TB_Report.Text.ToString());
+                                cmndReport.Parameters.Add(param);
+                                SqlDataReader reader = cmndReport.ExecuteReader();
+                                while (reader.Read())
+                                {
+                                    object num = reader.GetValue(0);
+                                    RW.RidesCount = int.Parse(num.ToString());
 
+                                }
+                                reader.Close();
+
+                                cmndReport = new SqlCommand("select sum(Distance) from Rides where DriverID=@DriverID",connect);
+                                param = new SqlParameter();
+                                param.ParameterName = "@DriverID";
+                                param.Value = int.Parse(TB_Report.Text.ToString());
+                                cmndReport.Parameters.Add(param);
+                                reader = cmndReport.ExecuteReader();
+                                while (reader.Read())
+                                {
+                                    object num = reader.GetValue(0);
+                                    RW.DistanceSum = double.Parse(num.ToString());
+                                }
+                                reader.Close();
+
+
+                                cmndReport = new SqlCommand("select sum(Summary) from Rides where DriverID=@DriverID",connect);
+                                param = new SqlParameter();
+                                param.ParameterName = "@DriverID";
+                                param.Value = int.Parse(TB_Report.Text.ToString());
+                                cmndReport.Parameters.Add(param);
+                                reader = cmndReport.ExecuteReader();
+                                while (reader.Read())
+                                {
+                                    object num = reader.GetValue(0);
+                                    RW.Sum = int.Parse(num.ToString());
+
+                                }
+                                reader.Close();
                             }
                             break;
                     }

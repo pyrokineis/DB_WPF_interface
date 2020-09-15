@@ -18,7 +18,7 @@ namespace Kursach.Windows
     public partial class ReportWindow : Window
     {
         public int Sum { get; set; }
-        public int DistanceSum { get; set; }
+        public double DistanceSum { get; set; }
         public int RidesCount { get; set; }
         public ReportWindow()
         {
