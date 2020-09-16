@@ -5,41 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="Auto" Width="500" Loaded="Window_Loaded">
+        Title="RegistrationWindow" Height="310" Width="500" Loaded="Window_Loaded">
     <Grid>
         <Grid Name="Driver_Grid" Visibility="Visible" >
-            <StackPanel >
+            <StackPanel Height="auto" >
                 <Label Content="Введите ФИО"/>
-                <TextBox Name="DriverFIO_TB" Text="lala"/>
+                <TextBox Name="DriverFIO_TB" />
                 <Label Content="Введите номер телефона"/>
-                <TextBox Name="DriverPhone_TB" Text="lala"/>
+                <TextBox Name="DriverPhone_TB" />
                 <Label Content="Укажите марку и модель машины"/>
-                <TextBox/>
+                <TextBox Name="DriverAuto_TB"/>
                 <Label Content="Укажите номерной знак авто в формате аа000а "/>
-                <TextBox Name="CarPlate_TB" Text="lala"/>
+                <TextBox Name="CarPlate_TB" />
                 <Label Content="Укажите номер страховки в формате 00 00 000000"/>
-                <TextBox Name="CarLicense_TB" Text="lala"/>
-                <Label/>
+                <TextBox Name="CarLicense_TB" />
+   
+                <Separator/>
                 <Button Name="Driver_Register_Button" Content="Зарегестрироваться" Click="Driver_Register_Button_Click" />
-                <Button Name="Driver_Back_Button" Content="Назад"/>
+                <Button Name="Driver_Back_Button" Content="Назад" Click="Driver_Back_Button_Click"/>
+                <Separator/>
             </StackPanel>
         </Grid>
+        
         <Grid Name="Client_Grid" Visibility="Hidden">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="21*"/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.ColumnSpan="2">
+            <StackPanel Height="auto" VerticalAlignment="Top">
                 <Label Content="Введите ФИО"/>
-                <TextBox Name="ClientFIO_TB" Text="lala"/>
+                <TextBox Name="ClientFIO_TB" Text=""/>
                 <Label Content="Введите номер телефона"/>
-                <TextBox Name="ClientPhone_TB" Text="lala"/>
+                <TextBox Name="ClientPhone_TB" Text=""/>
                 <Label Content="Укажите возраст"/>
-                <TextBox Name="ClientAge_TB" Text="lalala"/>
+                <TextBox Name="ClientAge_TB" Text=""/>
                 <Separator/>
                 <Button Name="Client_Register_Button" Content="Зарегестрироваться" Click="Client_Register_Button_Click" />
-                <Button Name="Client_Back_Button" Content="Назад"/>
+                <Button Name="Client_Back_Button" Content="Назад" Click="Driver_Back_Button_Click"/>
             </StackPanel>
         </Grid>
 

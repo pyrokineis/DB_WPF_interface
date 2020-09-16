@@ -110,12 +110,27 @@ namespace Kursach
             }
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private void btnRegisterClient_Click(object sender, RoutedEventArgs e)
         {
-            RegistrationTypeWindow RTW = new RegistrationTypeWindow();
-            RTW.connect = mainConnect;
-            RTW.ShowDialog();
+            RegistrationWindow RgW = new RegistrationWindow();
+            RgW.connect = mainConnect;
+            RgW.Driver_Grid.Visibility = Visibility.Hidden;
+            RgW.Client_Grid.Visibility = Visibility.Visible;
+            RgW.Name = "ClientRegisrationWindow";
+            RgW.ShowDialog();
         }
+
+        private void btnRegisterDriver_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationWindow RgW = new RegistrationWindow();
+            RgW.connect = mainConnect;
+            RgW.Client_Grid.Visibility = Visibility.Hidden;
+            RgW.Driver_Grid.Visibility = Visibility.Visible;
+            RgW.Name = "DriverRegisrationWindow";
+            RgW.ShowDialog();
+        }
+
+      
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

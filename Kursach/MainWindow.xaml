@@ -10,8 +10,9 @@
         <TextBox x:Name="TBoxLog" HorizontalAlignment="Left" Margin="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <PasswordBox x:Name="TBoxPass" HorizontalAlignment="Left" Margin="140,30,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnEnter" Content="Login" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Click="btnEnter_Click"/>
-        <Button x:Name="btnCancel" Content="Close" HorizontalAlignment="Left" Margin="256,154,0,0" VerticalAlignment="Top" Click="btnCancel_Click" />
-        <Button x:Name="btnRegister" Content="Зарегестрироваться" HorizontalAlignment="Left" Margin="90,154,0,0" VerticalAlignment="Top" Click="btnRegister_Click"/>
+        <Button x:Name="btnCancel" Content="Close" HorizontalAlignment="Center" Margin="0,164,0,0" VerticalAlignment="Top" Click="btnCancel_Click" />
+        <Button x:Name="btnRegisterClient" Content="Зарегестрироваться как клиент" HorizontalAlignment="Left" Margin="74,114,0,0" VerticalAlignment="Top" Click="btnRegisterClient_Click"/>
+        <Button x:Name="btnRegisterDriver" Content="Зарегестрироваться как водитель" HorizontalAlignment="Left" Margin="67,139,0,0" VerticalAlignment="Top" Click="btnRegisterDriver_Click"/>
 
 
     </Grid>
