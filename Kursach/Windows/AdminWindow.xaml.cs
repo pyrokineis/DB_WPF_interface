@@ -207,15 +207,15 @@ namespace Kursach
                         //ins
                         cmnd = new SqlCommand("insert into ExtraServises (Servise_Name, Servise_Surcharge) values (@Servise_Name, @Servise_Surcharge)",connect);
                         //cmnd.Parameters.Add("@Servise_ID",SqlDbType.Int,6, "Servise_ID");
-                        cmnd.Parameters.Add("@Servise_Name",SqlDbType.NVarChar,50, "@Servise_Name");
-                        cmnd.Parameters.Add("@Servise_Surcharge",SqlDbType.Int,6, "@Servise_Surcharge");
+                        cmnd.Parameters.Add("@Servise_Name",SqlDbType.NVarChar,50, "Servise_Name");
+                        cmnd.Parameters.Add("@Servise_Surcharge",SqlDbType.Int,6, "Servise_Surcharge");
                         adapter.InsertCommand = cmnd;
 
                         //update
-                        cmnd = new SqlCommand("update ExtraServises set Servise_Name=@Servise_Name, Servise_Surcharge=@Servise_Surcharge where @prevServise_ID=Servise_ID",connect);
-                        //cmnd.Parameters.Add("@Servise_ID", SqlDbType.Int, 6, "Servise_ID");
-                        cmnd.Parameters.Add("@Servise_Name", SqlDbType.NVarChar, 50, "@Servise_Name");
-                        cmnd.Parameters.Add("@Servise_Surcharge", SqlDbType.Int, 6, "@Servise_Surcharge");
+                        cmnd = new SqlCommand("update ExtraServises set Servise_ID=@Servise_ID, Servise_Name=@Servise_Name, Servise_Surcharge=@Servise_Surcharge where @prevServise_ID=Servise_ID",connect);
+                        cmnd.Parameters.Add("@Servise_ID", SqlDbType.Int, 6, "Servise_ID");
+                        cmnd.Parameters.Add("@Servise_Name", SqlDbType.NVarChar, 50, "Servise_Name");
+                        cmnd.Parameters.Add("@Servise_Surcharge", SqlDbType.Int, 6, "Servise_Surcharge");
                         SqlParameter parameter = cmnd.Parameters.Add("prevServise_ID", SqlDbType.Int,6,"Servise_ID");
                         parameter.SourceVersion = DataRowVersion.Original;
                         adapter.UpdateCommand = cmnd;
@@ -241,7 +241,7 @@ namespace Kursach
                         cmnd.Parameters.Add("@Pay_Operator",SqlDbType.NVarChar,100, "Pay_Operator");
                         adapter.InsertCommand = cmnd;
                         //upd
-                        cmnd = new SqlCommand("update Payment set Pay_Type=@Pay_Type, Pay_Operator=@Pay_Operator where prevPay_Operator=@Pay_Operator",connect);
+                        cmnd = new SqlCommand("update Payment set Pay_Type=@Pay_Type, Pay_Operator=@Pay_Operator where @prevPay_Operator=Pay_Operator",connect);
                         cmnd.Parameters.Add("@Pay_Type", SqlDbType.NVarChar, 20, "Pay_Type");
                         cmnd.Parameters.Add("@Pay_Operator", SqlDbType.NVarChar, 100, "Pay_Operator");
                         SqlParameter parameter = cmnd.Parameters.Add("@prevPay_Operator",SqlDbType.NVarChar,100,"Pay_Operator");
@@ -264,7 +264,7 @@ namespace Kursach
                         cmnd = new SqlCommand("insert into AutoClass (Class_Name,Coef) values (@Class_name, @Coef)", connect);
                         //cmnd.Parameters.Add("@Class_ID",SqlDbType.Int,6, "Class_ID");
                         cmnd.Parameters.Add("@Class_Name",SqlDbType.NVarChar,20, "Class_Name");
-                        cmnd.Parameters.Add("Coef",SqlDbType.Int,6, "@Coef");
+                        cmnd.Parameters.Add("@Coef",SqlDbType.Int,6, "Coef");
                         adapter.InsertCommand = cmnd;
                         //upd
                         cmnd = new SqlCommand("update AutoClass set Class_Name=@Class_Name, Coef=@Coef where @prevClass_ID=Class_ID", connect);
