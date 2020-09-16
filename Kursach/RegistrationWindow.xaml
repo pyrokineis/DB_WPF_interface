@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="Auto" Width="500">
+        Title="RegistrationWindow" Height="Auto" Width="500" Loaded="Window_Loaded">
     <Grid>
-        <Grid Name="Driver_Grid" Visibility="Hidden" >
+        <Grid Name="Driver_Grid" Visibility="Visible" >
             <StackPanel >
                 <Label Content="Введите ФИО"/>
                 <TextBox Name="DriverFIO_TB" Text="lala"/>
@@ -20,28 +20,31 @@
                 <Label Content="Укажите номер страховки в формате 00 00 000000"/>
                 <TextBox Name="CarLicense_TB" Text="lala"/>
                 <Label/>
-                <Button Name="Driver_Register_Button" Content="Зарегестрироваться" />
+                <Button Name="Driver_Register_Button" Content="Зарегестрироваться" Click="Driver_Register_Button_Click" />
                 <Button Name="Driver_Back_Button" Content="Назад"/>
             </StackPanel>
         </Grid>
-        <Grid Name="Client_Grid" Visibility="Visible">
+        <Grid Name="Client_Grid" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="21*"/>
+            </Grid.ColumnDefinitions>
 
-            <StackPanel>
+            <StackPanel Grid.ColumnSpan="2">
                 <Label Content="Введите ФИО"/>
                 <TextBox Name="ClientFIO_TB" Text="lala"/>
                 <Label Content="Введите номер телефона"/>
                 <TextBox Name="ClientPhone_TB" Text="lala"/>
                 <Label Content="Укажите возраст"/>
                 <TextBox Name="ClientAge_TB" Text="lalala"/>
-                <Label/>
-                <Button Name="Client_Register_Button" Content="Зарегестрироваться" />
+                <Separator/>
+                <Button Name="Client_Register_Button" Content="Зарегестрироваться" Click="Client_Register_Button_Click" />
                 <Button Name="Client_Back_Button" Content="Назад"/>
-                <TextBox/>
             </StackPanel>
         </Grid>
 
     </Grid>
-       
-   
+
+
 
 </Window>

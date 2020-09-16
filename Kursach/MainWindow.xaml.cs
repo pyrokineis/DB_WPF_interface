@@ -23,7 +23,7 @@ namespace Kursach
     {
         const string password = "main";
         const string num = "", Lic = "";
-        SqlConnection connect;
+        public SqlConnection mainConnect { get; set; }
         SqlCommand cmmnd = new SqlCommand();
 
         public MainWindow()
@@ -44,7 +44,7 @@ namespace Kursach
             {
                 AdminWindow AW = new AdminWindow();
                 AW.mainWindow = this;
-                AW.connect = connect;
+                AW.connect = mainConnect;
                 TBoxPass.Password = TBoxLog.Text = "";
                 AW.ShowDialog();
             }
@@ -52,7 +52,7 @@ namespace Kursach
             {
                     if (TBoxLog.Text.Length == 11)
                     {
-                        cmmnd.Connection = connect;
+                        cmmnd.Connection = mainConnect;
                         cmmnd.CommandText = "select Client_ID from Client where C_Phone_number = " + TBoxLog.Text.ToString();
                         SqlDataReader Reader = cmmnd.ExecuteReader();
                         if (!Reader.Read())
@@ -60,14 +60,14 @@ namespace Kursach
                         ClientWindow CW = new ClientWindow() { ClientID = int.Parse(Reader[0].ToString() )};
                         CW.mainWindow = this;
                         TBoxLog.Text = TBoxPass.Password = "";
-                        CW.connect = connect;
+                        CW.connect = mainConnect;
                         Reader.Close();
                         CW.ShowDialog();
                     }
 
                     else if (TBoxLog.Text.Length == 12)
                     {
-                        cmmnd.Connection = connect;
+                        cmmnd.Connection = mainConnect;
                         cmmnd.CommandText = "select Driver_ID from Driver where Licence_number = " + "'" + TBoxLog.Text.ToString()+"'";
                         SqlDataReader Reader = cmmnd.ExecuteReader();
                         if (!Reader.Read())
@@ -75,7 +75,7 @@ namespace Kursach
                         DriverWindow DW = new DriverWindow() { DriverID = int.Parse(Reader[0].ToString() )};
                         DW.mainWindow = this;
                         TBoxLog.Text = TBoxPass.Password = "";
-                        DW.connect = connect;
+                        DW.connect = mainConnect;
                         Reader.Close();
                         DW.ShowDialog();
 
@@ -97,11 +97,11 @@ namespace Kursach
 
            
             string dataSource = @"Data Source=49B2\SQLEXPRESS; Initial Catalog = Taxi_agregator_DB; Integrated Security=True";
-            connect = new SqlConnection(dataSource);
+            mainConnect = new SqlConnection(dataSource);
 
             try
             {
-                connect.Open();
+                mainConnect.Open();
             }
             catch
             {
@@ -113,12 +113,13 @@ namespace Kursach
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             RegistrationTypeWindow RTW = new RegistrationTypeWindow();
+            RTW.connect = mainConnect;
             RTW.ShowDialog();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            connect.Close();
+            mainConnect.Close();
             Close();
             Application.Current.Shutdown();
 

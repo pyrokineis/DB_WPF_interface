@@ -211,6 +211,7 @@ namespace Kursach
                         cmnd.Parameters.Add("@Servise_Surcharge",SqlDbType.Int,6, "Servise_Surcharge");
                         adapter.InsertCommand = cmnd;
 
+
                         //update
                         cmnd = new SqlCommand("update ExtraServises set Servise_ID=@Servise_ID, Servise_Name=@Servise_Name, Servise_Surcharge=@Servise_Surcharge where @prevServise_ID=Servise_ID",connect);
                         cmnd.Parameters.Add("@Servise_ID", SqlDbType.Int, 6, "Servise_ID");
@@ -654,6 +655,7 @@ namespace Kursach
                     }
 
                     ReportWindow RW = new ReportWindow();
+                    
                     switch (rbText)
                     {
                         case "Client":

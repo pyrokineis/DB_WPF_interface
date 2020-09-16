@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach"
         mc:Ignorable="d"
-        Title="RegistrationTypeWindow" Height="Auto" Width="250">
+        Title="RegistrationTypeWindow" Height="Auto" Width="250" Loaded="Window_Loaded">
     <Grid>
         <StackPanel Height="Auto" Width="Auto">
             <RadioButton Name="RB_Client" Content="Зарегистрироваться как Клиент" Checked="RB_Client_Checked"/>
