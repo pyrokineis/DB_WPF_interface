@@ -77,7 +77,7 @@
         
         </StackPanel>
 
-        <Grid Name="OrderGrid" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+        <Grid Name="OrderGrid" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Visibility="Hidden">
             <StackPanel Height="auto" >
                 <Separator/>
                 <Label Content="Укажите пункт отправления"/>
@@ -106,7 +106,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Name="TableGrid" Visibility="Hidden">
+        <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Name="TableGrid" Visibility="Visible">
          
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>

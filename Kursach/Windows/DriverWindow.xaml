@@ -23,14 +23,8 @@
 
 
         <StackPanel Grid.Column="0" Grid.Row="3">
-            <Button x:Name="Btn_History"  Height="90" Click="Btn_History_Click">
-                <StackPanel Orientation="Horizontal" Width="270">
 
-                    <TextBlock Text="History" FontSize="30" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
             <Separator/>
-
             <Button x:Name="Btn_Report"  Click="Btn_Report_Click" >
                 <StackPanel Orientation="Horizontal" Width="25">
 
