@@ -54,9 +54,11 @@ namespace Kursach
             servCmndLine = "select * from ExtraServises";
             clssCmndLine = "select * from AutoClass";
             genCmndLine = "select * from Rides";
+            
+           
         }
 
-
+       
         private void Btn_Update_Click(object sender, RoutedEventArgs e)
         {
             DB_Updater();
@@ -755,7 +757,10 @@ namespace Kursach
                                 reader.Close();
                             }
                             break;
+                            
                     }
+                    RW.ShowDialog();
+
                 }
            }
            

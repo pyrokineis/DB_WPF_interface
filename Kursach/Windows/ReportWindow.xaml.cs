@@ -17,12 +17,29 @@ namespace Kursach.Windows
     /// </summary>
     public partial class ReportWindow : Window
     {
-        public int Sum { get; set; }
-        public double DistanceSum { get; set; }
-        public int RidesCount { get; set; }
+        int summary, Ridescount;
+        double dist;
+        string str;
+     
+        public int Sum { get { return summary; } set { this.summary = value; } }
+        public double DistanceSum { get { return dist; } set { this.dist = value; } }
+        public int RidesCount { get { return Ridescount; } set { this.Ridescount = value; } }
         public ReportWindow()
         {
             InitializeComponent();
+        }
+        List<string> list = new List<string>();
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            str = "Всего поездок - " + RidesCount.ToString();
+            list.Add(str);
+            str = "Общая сумма поездок - " + Sum.ToString() + "р.";
+            list.Add(str);
+            str = "Общее расстояние - " + DistanceSum.ToString() + "км.";
+            list.Add(str);
+            Report_LB.ItemsSource = list;
+ 
         }
     }
 }

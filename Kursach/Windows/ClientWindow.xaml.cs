@@ -64,6 +64,7 @@ namespace Kursach.Windows
             DT = new DataTable();
             DT.Load(reader);
             CDataGrid.ItemsSource = DT.DefaultView;
+            Column_Selection_CB.ItemsSource = CtTableStrings;
         }
         private void LoadClientInfo(int id)
         {
