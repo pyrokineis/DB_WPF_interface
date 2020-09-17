@@ -72,22 +72,41 @@
                     <TextBlock Text="Find"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-         
+     
             <Button Name ="Btn_cancel" Content="Cancel" Click="Btn_cancel_Click"/>
-            <Separator Width="20" Margin="20,0,0,0">
-                <Separator.RenderTransform>
-                    <RotateTransform Angle="90"/>
-                </Separator.RenderTransform>
-            </Separator>
+        
         </StackPanel>
 
-        <Grid Name="OrderGrid">
-            <StackPanel>
-                
+        <Grid Name="OrderGrid" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+            <StackPanel Height="auto" >
+                <Separator/>
+                <Label Content="Укажите пункт отправления"/>
+                <TextBox Name="Adress1_TB" />
+                <Label Content="Укажите проможуточный пункт (при наличии)"/>
+                <TextBox Name="Adress2_TB" />
+                <Label Content="Укажите пункт назначения"/>
+                <TextBox Name="Adress3_TB"/>
+                <Label Content="Укажите желаемый класс авто"/>
+                <ComboBox Name="AutoClass_TB">
+
+                </ComboBox>
+                <Label Content="Укажите тип оплаты"/>
+                <ComboBox Name="PayType_CB">
+                   
+                </ComboBox>
+                <Label Content="Укажите доп услугу"/>
+                <ComboBox Name="ExtraServ_CB">
+
+                </ComboBox>
+                <Separator/>
+                <Button Name="PlaceOrder" Content="Подтвердить" Click="PlaceOrder_Click">
+                    
+                </Button>
+
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Name="TableGrid">
+        <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Name="TableGrid" Visibility="Hidden">
          
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
