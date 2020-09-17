@@ -7,15 +7,22 @@
         mc:Ignorable="d"
         Title="ClientWindow" Height="500" Width="800" Loaded="Window_Loaded" Closed="Window_Closed" Visibility="Visible">
     <Grid>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.4*" />
+            <ColumnDefinition Width="0.30*"  />
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"  />
 
         </Grid.ColumnDefinitions>
-        <GridSplitter Grid.Column="1" Width="5"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <GridSplitter Grid.Column="1" Grid.RowSpan="3" Width="5"/>
 
-        <StackPanel Grid.Column="0">
+
+        <StackPanel Grid.Column="0" Grid.Row="3">
             <Button x:Name="Btn_Serve"  Height="90" Click="Btn_Serve_Click" >
                 <StackPanel Orientation="Horizontal" Width="250">
 
@@ -30,24 +37,13 @@
             </Button>
             <Separator/>
 
-            <ComboBox Name="Column_Selection_CB"   >
+            <Button x:Name="Btn_Report"  Click="Btn_Report_Click" >
+                <StackPanel Orientation="Horizontal" Width="25">
 
-            </ComboBox>
-            <TextBox Name="TB_Search" />
-            <Button x:Name="Btn_Find" Height="90" Click="Btn_Find_Click">
-                <StackPanel Orientation="Horizontal" Width="270">
-                
-                    <TextBlock Text="Find" FontSize="30" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBlock Text="Stats"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-          
-
-            <Button x:Name="Btn_Hmm"  Height="90" Click="Btn_hmm_Click">
-                <StackPanel Orientation="Horizontal" Width="270">
-                    
-                    <TextBlock Text="???" FontSize="30" VerticalAlignment="Center" Width="166"/>
-                </StackPanel>
-            </Button>
+            
             <Button Name="Btn_back" Height="90" Click="Btn_Back_Click">
                 <StackPanel Orientation="Horizontal" Width="270">
 
@@ -56,14 +52,52 @@
             </Button>
         </StackPanel>
 
-        <Grid  Grid.Column="2">
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Name="top_SP2" >
+            <Label Content="Choose Column" Margin="17,0,0,0"/>
+            <Label Content="Search in Tabel" Margin="7,0,0,0"/>
+
+        </StackPanel>
+        
+        
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" Name="top_SP"  >
+        
+            <ComboBox Name="Column_Selection_CB" Grid.Column="1" Grid.Row="1" Width="100"  >
+
+            </ComboBox>
+            <TextBox Name="TB_Search" Width="150" />
+
+            <Button x:Name="Btn_Find"  Click="Btn_Find_Click" >
+                <StackPanel Orientation="Horizontal" Width="25">
+
+                    <TextBlock Text="Find"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+         
+            <Button Name ="Btn_cancel" Content="Cancel" Click="Btn_cancel_Click"/>
+            <Separator Width="20" Margin="20,0,0,0">
+                <Separator.RenderTransform>
+                    <RotateTransform Angle="90"/>
+                </Separator.RenderTransform>
+            </Separator>
+        </StackPanel>
+
+        <Grid Name="OrderGrid">
+            <StackPanel>
+                
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Name="TableGrid">
+         
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <DataGridColumnHeader Grid.Row="0"/>
-            <DataGrid Name="CDataGrid" AutoGenerateColumns="True" Grid.Row="1" Height="450" IsReadOnly="True" >
+            <DataGridColumnHeader Grid.Row="0" Grid.ColumnSpan="2"/>
+            <DataGrid Name="CDataGrid" AutoGenerateColumns="True" Grid.Row="1" Height="350" IsReadOnly="False" >
             </DataGrid>
+
         </Grid>
+
     </Grid>
 </Window>

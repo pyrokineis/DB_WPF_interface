@@ -64,12 +64,37 @@ namespace Kursach.Windows
             SqlDataReader reader = cmmnd.ExecuteReader();
             DT = new DataTable();
             DT.Load(reader);
-            DTableGrid.ItemsSource = DT.DefaultView;
+            DDataGrid.ItemsSource = DT.DefaultView;
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
             mainWindow.Visibility = Visibility.Visible;
+        }
+
+        private void Btn_back_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_Find_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_History_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_Report_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

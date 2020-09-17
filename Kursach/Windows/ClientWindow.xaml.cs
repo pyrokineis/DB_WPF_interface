@@ -41,7 +41,7 @@ namespace Kursach.Windows
         }
         public MainWindow mainWindow { get; set; }
         public int ClientID { get; set; }
-        public SqlConnection connect = new SqlConnection();
+        public SqlConnection connect { get; set; }
         SqlCommand cmnd, cmndFind;
         SqlDataReader Reader;
         Client client;
@@ -98,18 +98,28 @@ namespace Kursach.Windows
 
         private void Btn_Serve_Click(object sender, RoutedEventArgs e)
         {
+            OrderGrid.Visibility = Visibility.Visible;
+            TableGrid.Visibility = Visibility.Hidden;
+            top_SP.Visibility = Visibility.Hidden;
+            top_SP2.Visibility = Visibility.Hidden;
+            //адр123, дист, сумма, дата, айдди вод, айди кл, оп опл, класс авто, доп усл
+            //ввод адр123, оп опл, класс авто, дор усл
+            //обн цены
 
         }
         private void Btn_History_Click(object sender, RoutedEventArgs e)
         {
-
+            TableGrid.Visibility = Visibility.Visible;
+            top_SP.Visibility = Visibility.Visible;
+            top_SP2.Visibility = Visibility.Visible;
         }
         private void Btn_Find_Click(object sender, RoutedEventArgs e)
         {
-            
-              
-                        switch (Column_Selection_CB.SelectedItem.ToString())
-                        {
+        
+
+
+            switch (Column_Selection_CB.SelectedItem.ToString())
+            {
                             case "Client_ID":
                                 cmndFind = new SqlCommand($"select * from Client where Client_ID like '%{TB_Search.Text.ToString()}%'");
                                 break;
@@ -122,7 +132,7 @@ namespace Kursach.Windows
                             case "C_Phone_Number":
                                 cmndFind = new SqlCommand($"select * from Client where C_Phone_number like '%{TB_Search.Text.ToString()}%'");
                                 break;
-                        }
+            }
                
                     
                 
@@ -138,13 +148,20 @@ namespace Kursach.Windows
          
             
         }
-        private void Btn_hmm_Click(object sender, RoutedEventArgs e)
+
+        private void Btn_cancel_Click(object sender, RoutedEventArgs e)
         {
 
         }
-        private void Btn_Back_Click(object sender, RoutedEventArgs e)
+
+        private void Btn_Report_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Btn_Back_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
