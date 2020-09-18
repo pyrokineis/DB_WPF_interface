@@ -22,7 +22,7 @@
         <GridSplitter Grid.Column="1" Grid.RowSpan="3" Width="5"/>
 
 
-        <StackPanel Grid.Column="0" Grid.Row="3">
+        <StackPanel Grid.Column="0" Grid.Row="3" Margin="0,5,0,0">
 
             <Separator/>
             <Button x:Name="Btn_Report"  Click="Btn_Report_Click" >
@@ -31,11 +31,11 @@
                     <TextBlock Text="Statistics"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            
-            <Button Name="Btn_back" Height="90" Click="Btn_back_Click">
-                <StackPanel Orientation="Horizontal" Width="270">
+            <Separator/>
+            <Button Name="Btn_back" Height="30" Click="Btn_back_Click">
+                <StackPanel Orientation="Horizontal" Width="160">
 
-                    <TextBlock Text="Back" FontSize="30" VerticalAlignment="Center" Width="166"/>
+                    <TextBlock Text="Back" FontSize="20" VerticalAlignment="Center" Width="166"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -54,19 +54,15 @@
             </ComboBox>
             <TextBox Name="TB_Search" Width="150" />
 
-            <Button x:Name="Btn_Find"  Click="Btn_Find_Click" >
+            <Button x:Name="Btn_Find"  Click="Btn_Find_Click" Margin="5,0,0,0" >
                 <StackPanel Orientation="Horizontal" Width="25">
 
                     <TextBlock Text="Find"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            
-            <Button Name ="Btn_cancel" Content="Cancel" Click="Btn_cancel_Click"/>
-            <Separator Width="20" Margin="20,0,0,0">
-                <Separator.RenderTransform>
-                    <RotateTransform Angle="90"/>
-                </Separator.RenderTransform>
-            </Separator>
+
+            <Button Name ="Btn_cancel" Content="Cancel" Click="Btn_cancel_Click" Margin="5,0,0,0"/>
+           
         </StackPanel>
 
         <Grid Name="OrderGrid">

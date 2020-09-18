@@ -21,7 +21,8 @@
                 <TextBox Name="CarLicense_TB" />
    
                 <Separator/>
-                <Button Name="Driver_Register_Button" Content="Зарегестрироваться" Click="Driver_Register_Button_Click" />
+                <Button Name="Driver_Register_Button" Content="Зарегестрироваться" Click="Driver_Register_Button_Click" Margin="0,0,0,5" />
+                
                 <Button Name="Driver_Back_Button" Content="Назад" Click="Driver_Back_Button_Click"/>
                 <Separator/>
             </StackPanel>
@@ -36,8 +37,9 @@
                 <Label Content="Укажите возраст"/>
                 <TextBox Name="ClientAge_TB" Text=""/>
                 <Separator/>
-                <Button Name="Client_Register_Button" Content="Зарегестрироваться" Click="Client_Register_Button_Click" />
+                <Button Name="Client_Register_Button" Content="Зарегестрироваться" Click="Client_Register_Button_Click" Margin="0,0,0,5"/>
                 <Button Name="Client_Back_Button" Content="Назад" Click="Driver_Back_Button_Click"/>
+                <Separator/>
             </StackPanel>
         </Grid>
 

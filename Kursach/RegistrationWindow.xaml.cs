@@ -101,7 +101,7 @@ namespace Kursach
                     {
                         try
                         {
-                            int.Parse(DriverPhone_TB.Text);
+                           // int.Parse(DriverPhone_TB.Text);
                         }
 
                         catch

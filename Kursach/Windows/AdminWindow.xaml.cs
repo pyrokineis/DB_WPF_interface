@@ -30,7 +30,7 @@ namespace Kursach
         ComboBoxItem CBi;
 
         string rbText, genCmndLine, drCmndLine, cltCmndLine, payCmndLine, clssCmndLine, servCmndLine;
-        List <string> GenTableStrings = new List<string> { "Rides_ID", "Adress1", "Adress2", "Adress3","Distance", "Summary", "Datatime", "DriverID", "ClientID", "PaymentOperator", "autoClass_ID", "ExServise_ID" };
+        List <string> GenTableStrings = new List<string> { "Rides_ID", "Adress1", "Adress2", "Adress3","Distance", "Summary", "DataTime", "DriverID", "ClientID", "PaymentOperator", "autoClass_ID", "ExServise_ID" };
         List<string> CtTableStrings = new List<string> { "Client_ID", "C_Full_name", "C_Age", "C_Phone_Number" };
         List<string> DrTableStrings = new List<string> { "Driver_ID", "D_Full_name", "Auto_model", "Auto_plate", "D_Phone_Number", "Licence_number" };
         List<string> PayTableStrings = new List<string> { "Pay_Type", "Pay_Operator" };
