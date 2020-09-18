@@ -40,6 +40,7 @@ namespace Kursach
         public AdminWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
      
@@ -639,6 +640,53 @@ namespace Kursach
                 ADataGrid.ItemsSource = DT.DefaultView;
             }
         }
+        private List<string> LoadClientInfo(int id)
+        {
+            List<string> info = new List<string>();
+            cmnd = new SqlCommand("select * from Client where Client_ID =" + id,connect);
+            SqlDataReader reader = cmnd.ExecuteReader();
+            if (reader.Read())
+            {
+                info.Add("ID - "+reader[0].ToString());
+                info.Add("ФИО - "+reader[1].ToString());
+                info.Add("Возраст - "+reader[2].ToString());
+                info.Add("Номер телефона - "+reader[3].ToString());
+            }
+
+            else
+            {
+                MessageBox.Show("ID не найден");
+                Close();
+            }
+            reader.Close();
+            return info;
+
+        }
+
+        private List<string> LoadDriverInfo(int id)
+        {
+            List<string> info = new List<string>();
+            cmnd = new SqlCommand("select * from Driver where Driver_ID =" + id, connect);
+            SqlDataReader reader = cmnd.ExecuteReader();
+            if (reader.Read())
+            {
+                info.Add("ID - " + reader[0].ToString());
+                info.Add("ФИО - " + reader[1].ToString());
+                info.Add("Автомобиль - " + reader[2].ToString());
+                info.Add("Номерной знак автомобиля - " + reader[3].ToString());
+                info.Add("Номер телефона - " + reader[4].ToString());
+                info.Add("Номер водительских прав - " + reader[5].ToString());
+            }
+
+            else
+            {
+                MessageBox.Show("ID не найден");
+                Close();
+            }
+            reader.Close();
+            return info;
+
+        }
         private void Btn_Report_Click(object sender, RoutedEventArgs e)
         {
            if(rbText!=null)
@@ -657,12 +705,13 @@ namespace Kursach
                     }
 
                     ReportWindow RW = new ReportWindow();
+                   
                     
                     switch (rbText)
                     {
                         case "Client":
                             {
-                               
+                                RW.InfoList = LoadClientInfo(int.Parse(TB_Report.Text.ToString()));
 
                                 cmndReport = new SqlCommand("select count(Rides_ID) from Rides where ClientID=@ClientID",connect);
                                 SqlParameter param = new SqlParameter();
@@ -714,6 +763,7 @@ namespace Kursach
 
                         case "Driver":
                             {
+                                 RW.InfoList = LoadDriverInfo(int.Parse(TB_Report.Text.ToString()));
                                 cmndReport = new SqlCommand("select count(Rides_ID) from Rides where DriverID=@DriverID",connect);
                                 SqlParameter param = new SqlParameter();
                                 param.ParameterName = "@DriverID";

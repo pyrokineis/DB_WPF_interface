@@ -41,11 +41,12 @@ namespace Kursach.Windows
         public int DriverID {get;set;}
 
         public SqlConnection connect = new SqlConnection();
-        SqlCommand cmnd = new SqlCommand();
+        SqlCommand cmnd, cmndDrop,cmndFind;
         SqlDataReader reader;
         Driver driver;
         DataTable DT;
         List<string> DrTableStrings = new List<string> { "Driver_ID", "D_Full_name", "Auto_model", "Auto_plate", "D_Phone_Number", "Licence_number" };
+      
 
         public DriverWindow()
         {
@@ -55,11 +56,20 @@ namespace Kursach.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             mainWindow.Visibility = Visibility.Collapsed;
-            string CmndLine = "select adress1, adress2, adress3, C_Full_name, C_Phone_number," +
+            SqlCommand DriverView =new SqlCommand("create view DriverView as select adress1, adress2, adress3, C_Full_name, C_Phone_number," +
                " Datatime, Distance, summary,  PaymentOperator, Servise_name, " +
              "Servise_surcharge from Rides r JOIN Driver d ON r.DriverID = d.Driver_ID JOIN Client c ON r.ClientID = c.Client_ID join Payment p on " +
-             "r.PaymentOperator = p.Pay_operator join ExtraServises e on r.ExServise_ID = e.servise_ID where Driver_ID = " + DriverID.ToString();
-            cmnd = new SqlCommand(CmndLine, connect);
+             "r.PaymentOperator = p.Pay_operator join ExtraServises e on r.ExServise_ID = e.servise_ID where Driver_ID = " + DriverID.ToString(),connect);
+
+           
+            cmndDrop = new SqlCommand("drop view DriverView",connect);
+            cmndDrop.ExecuteNonQuery();
+
+            DriverView.ExecuteNonQuery();
+
+            string cmndLine = "select * from DriverView";
+            cmnd =new SqlCommand(cmndLine, connect);
+
             SqlDataReader reader = cmnd.ExecuteReader();
             DT = new DataTable();
             DT.Load(reader);
@@ -79,10 +89,7 @@ namespace Kursach.Windows
 
         private void Btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            string CmndLine = "select adress1, adress2, adress3, C_Full_name, C_Phone_number," +
-             " Datatime, Distance, summary,  PaymentOperator, Servise_name, " +
-           "Servise_surcharge from Rides r JOIN Driver d ON r.DriverID = d.Driver_ID JOIN Client c ON r.ClientID = c.Client_ID join Payment p on " +
-           "r.PaymentOperator = p.Pay_operator join ExtraServises e on r.ExServise_ID = e.servise_ID where Driver_ID = " + DriverID.ToString();
+            string CmndLine = "select * from DriverView";
             cmnd = new SqlCommand(CmndLine, connect);
             SqlDataReader reader = cmnd.ExecuteReader();
             DT = new DataTable();
@@ -99,17 +106,48 @@ namespace Kursach.Windows
                 {
                     switch (Column_Selection_CB.SelectedItem.ToString())
                     {
-                        case "Driver_ID":
-                            cmnd = new SqlCommand($"select * from Client where Client_ID like '%{TB_Search.Text.ToString()}%'");
+                        case "Adress1":
+                            cmndFind = new SqlCommand($"select * from DriverView where Adress1 like '%{TB_Search.Text.ToString()}%'");
                             break;
-                        case "D_Full_name":
-                            cmnd = new SqlCommand($"select * from Client where C_Full_name like '%{TB_Search.Text.ToString()}%'");
+
+                        case "Addres2":
+                            cmndFind = new SqlCommand($"select * from DriverView where Adress2 like '%{TB_Search.Text.ToString()}%'");
                             break;
-                        case "C_":
-                            cmnd = new SqlCommand($"select * from Client where C_Age like '%{TB_Search.Text.ToString()}%'");
+
+                        case "Adress3":
+                            cmndFind = new SqlCommand($"select * from DriverView where Adress3 like '%{TB_Search.Text.ToString()}%'");
                             break;
-                        case "D_Phone_Number":
-                            cmnd = new SqlCommand($"select * from Client where C_Phone_number like '%{TB_Search.Text.ToString()}%'");
+
+                        case "Distance":
+                            cmndFind = new SqlCommand($"select * from DriverView where Distance like '%{TB_Search.Text.ToString()}%'");
+                            break;
+
+                        case "Summary":
+                            cmndFind = new SqlCommand($"select * from DriverView where Summary like '%{TB_Search.Text.ToString()}%'");
+                            break;
+
+                        case "DataTime":
+                            cmndFind = new SqlCommand($"select * from DriverView where DataTime like '%{TB_Search.Text.ToString()}%'");
+                            break;
+
+                        case "C_Full_name":
+                            cmndFind = new SqlCommand($"select * from DriverView where D_Full_name like '%{TB_Search.Text.ToString()}%'");
+                            break;
+
+                        case "C_Phone_number":
+                            cmndFind = new SqlCommand($"select * from DriverView where D_Phone_number like '%{TB_Search.Text.ToString()}%'");
+                            break;
+
+                        case "PaymentOperator":
+                            cmndFind = new SqlCommand($"select * from DriverView where PaymentOperator like '%{TB_Search.Text.ToString()}%'");
+                            break;
+
+                        case "Servise_name":
+                            cmndFind = new SqlCommand($"select * from DriverView where Servise_name like '%{TB_Search.Text.ToString()}%' ");
+                            break;
+
+                        case "Servise_surcharge":
+                            cmndFind = new SqlCommand($"select * from DriverView where Servise_surcharge like '%{TB_Search.Text.ToString()}%' ");
                             break;
                     }
                     cmnd.Connection = connect;
@@ -120,11 +158,6 @@ namespace Kursach.Windows
 
                 }
             }
-
-        }
-
-        private void Btn_History_Click(object sender, RoutedEventArgs e)
-        {
 
         }
 
@@ -141,7 +174,7 @@ namespace Kursach.Windows
             while (reader.Read())
             {
                 object num = reader.GetValue(0);
-                RW.Sum = int.Parse(num.ToString());
+                RW.RidesCount = int.Parse(num.ToString());
 
             }
             reader.Close();
@@ -155,7 +188,7 @@ namespace Kursach.Windows
             while (reader.Read())
             {
                 object num = reader.GetValue(0);
-                RW.Sum = int.Parse(num.ToString());
+                RW.DistanceSum = double.Parse(num.ToString());
 
             }
             reader.Close();
@@ -174,7 +207,7 @@ namespace Kursach.Windows
             }
             reader.Close();
 
-            RW.ShowDialog();
+            RW.Show();
 
         }
     }

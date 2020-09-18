@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach.Windows"
         mc:Ignorable="d"
-        Title="ReportWindow" Loaded="Window_Loaded">
-    <Grid>
-        <ListBox Name="Report_LB" Height="auto" Width="auto"  >
-            
-        </ListBox>
+        Title="ReportWindow" Loaded="Window_Loaded" SizeToContent="WidthAndHeight" >
+    <Grid  >
+        <StackPanel>
+            <ListBox Name="Report_LB"  >
+
+            </ListBox>
+            <Button Content="Закрыть" Click="Button_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

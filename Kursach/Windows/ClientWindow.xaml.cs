@@ -38,18 +38,25 @@ namespace Kursach.Windows
             {
                 ID = id;
             }
+            static List<string> GetInfo()
+            {
+                List<string> Info = new List<string>();
+
+                return Info;
+            }
         }
         public MainWindow mainWindow { get; set; }
         public int ClientID { get; set; }
         public SqlConnection connect { get; set; }
-        SqlCommand cmnd, cmndFind;
+        SqlCommand cmnd, cmndFind, cmndDrop;
         SqlDataReader reader;
         Client client;
         DataTable DT;
         int rDriver, driverCount, DriverID, serviseID,classID, ridesID;
+        ComboBoxItem CBi;
         string payOperator,payType;
 
-        List<string> CtTableStrings = new List<string> { "Client_ID", "C_Full_name", "C_Age", "C_Phone_Number" };
+        List<string> CtTableStrings = new List<string> {  "Adress1", "Adress2", "Adress3", "D_Full_name", "D_Phone_number", "Auto_model", "Auto_plate", "Datatime","Distance", "Summary",  "PaymentOperator", "Servise_name", "Servise_surcharge"};
         List<string> DriversIDs = new List<string> { };
         List<string> PayTypeString = new List<string> { };
         List<string> PayOpsString = new List<string> { };
@@ -58,51 +65,43 @@ namespace Kursach.Windows
         public ClientWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             mainWindow.Visibility = Visibility.Collapsed;
-            string CmndLine = "select adress1, adress2, adress3, D_Full_name, D_Phone_number, Auto_model, Auto_plate," +
+            
+
+            SqlCommand ClientView = new SqlCommand("create view ClientView as select adress1, adress2, adress3, D_Full_name, D_Phone_number, Auto_model, Auto_plate," +
               " Datatime, Distance, summary,  PaymentOperator, Servise_name, " +
             "Servise_surcharge from Rides r JOIN Driver d ON r.DriverID = d.Driver_ID JOIN Client c ON r.ClientID = c.Client_ID join Payment p on " +
-            "r.PaymentOperator = p.Pay_operator join ExtraServises e on r.ExServise_ID = e.servise_ID where ClientID = " + ClientID.ToString();
+            "r.PaymentOperator = p.Pay_operator join ExtraServises e on r.ExServise_ID = e.servise_ID where ClientID = " + ClientID.ToString(),connect);
+
+            cmndDrop = new SqlCommand("drop view ClientView", connect);
+            cmndDrop.ExecuteNonQuery();
+
+            ClientView.ExecuteNonQuery();
+
+
+            string CmndLine = "select * from ClientView";
             cmnd = new SqlCommand(CmndLine, connect);
+
+
             SqlDataReader reader = cmnd.ExecuteReader();
             DT = new DataTable();
             DT.Load(reader);
             CDataGrid.ItemsSource = DT.DefaultView;
             Column_Selection_CB.ItemsSource = CtTableStrings;
-        }
-        private void LoadClientInfo(int id)
-        {
-            cmnd.CommandText = "select * from Client where Client_ID =" + id;
-            reader = cmnd.ExecuteReader();
-            if (reader.Read())
-            {
-                client = new Client(
-                    (reader[0].ToString()),
-                    reader[1].ToString(),
-                    reader[2].ToString(),
-                    reader[3].ToString()
-                    );
-            }
-
-            else
-            {
-                MessageBox.Show("нет таких");
-                Close();
-
-            }
             reader.Close();
-
-
         }
+       
 
         private void Window_Closed(object sender, EventArgs e)
         {
             mainWindow.Visibility = Visibility.Visible;
         }
+
 
         private void Btn_Serve_Click(object sender, RoutedEventArgs e)
         {
@@ -163,49 +162,85 @@ namespace Kursach.Windows
         }
         private void Btn_Find_Click(object sender, RoutedEventArgs e) //dodelat
         {
-            if (Column_Selection_CB.SelectedItem != null)
+
+            if (Column_Selection_CB.SelectedIndex > -1)
             {
-
-                if (TB_Search.Text.Length > 0)
+                
+                switch (Column_Selection_CB.SelectedItem.ToString())
                 {
-                    switch (Column_Selection_CB.SelectedItem.ToString())
-                    {
-                        case "Client_ID":
-                            cmndFind = new SqlCommand($"select * from Client where Client_ID like '%{TB_Search.Text.ToString()}%'");
-                            break;
-                        case "C_Full_name":
-                            cmndFind = new SqlCommand($"select * from Client where C_Full_name like '%{TB_Search.Text.ToString()}%'");
-                            break;
-                        case "C_Age":
-                            cmndFind = new SqlCommand($"select * from Client where C_Age like '%{TB_Search.Text.ToString()}%'");
-                            break;
-                        case "C_Phone_Number":
-                            cmndFind = new SqlCommand($"select * from Client where C_Phone_number like '%{TB_Search.Text.ToString()}%'");
-                            break;
-                    }
-                    cmndFind.Connection = connect;
-                    SqlDataReader reader = cmndFind.ExecuteReader();
-                    DataTable FDT = new DataTable();
-                    FDT.Load(reader);
-                    CDataGrid.ItemsSource = FDT.DefaultView;
+                           
+                            case "Adress1":
+                         cmndFind = new SqlCommand($"select * from ClientView where Adress1 like '%{TB_Search.Text.ToString()}%'");
+                         break;
 
+                            case "Addres2":
+                        cmndFind = new SqlCommand($"select * from ClientView where Adress2 like '%{TB_Search.Text.ToString()}%'");
+                        break;
+
+                            case "Adress3":
+                        cmndFind = new SqlCommand($"select * from ClientView where Adress3 like '%{TB_Search.Text.ToString()}%'");
+                        break;
+
+                            case "Distance":
+                        cmndFind = new SqlCommand($"select * from ClientView where Distance like '%{TB_Search.Text.ToString()}%'");
+                        break;
+
+                            case "Summary":
+                        cmndFind = new SqlCommand($"select * from ClientView where Summary like '%{TB_Search.Text.ToString()}%'");
+                        break;
+
+                            case "DataTime":
+                        cmndFind = new SqlCommand($"select * from ClientView where DataTime like '%{TB_Search.Text.ToString()}%'");
+                        break;
+
+                            case "D_Full_name":
+                        cmndFind = new SqlCommand($"select * from ClientView where D_Full_name like '%{TB_Search.Text.ToString()}%'");
+                        break;
+
+                            case "D_Phone_number":
+                        cmndFind = new SqlCommand($"select * from ClientView where D_Phone_number like '%{TB_Search.Text.ToString()}%'");
+                        break;
+
+                            case "Auto_model":
+                        cmndFind = new SqlCommand($"select * from ClientView where Auto_model like '%{TB_Search.Text.ToString()}%'" );
+                        break;
+
+                            case "Auto_plate":
+                        cmndFind = new SqlCommand($"select * from ClientView where D_Full_name like '%{TB_Search.Text.ToString()}%'");
+                        break;
+                       
+                            case "PaymentOperator":
+                         cmndFind = new SqlCommand($"select * from ClientView where PaymentOperator like '%{TB_Search.Text.ToString()}%'");
+                         break;
+
+                            case "Servise_name":
+                         cmndFind = new SqlCommand($"select * from ClientView where Servise_name like '%{TB_Search.Text.ToString()}%' ");
+                         break;
+
+                            case "Servise_surcharge":
+                         cmndFind = new SqlCommand($"select * from ClientView where Servise_surcharge like '%{TB_Search.Text.ToString()}%' ");
+                         break;
                 }
+                cmndFind.Connection = connect;
+                SqlDataReader reader = cmndFind.ExecuteReader();
+                DataTable FDT = new DataTable();
+                FDT.Load(reader);
+                CDataGrid.ItemsSource = FDT.DefaultView;
+
             }
-         
+
             
         }
 
         private void Btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            string CmndLine = "select adress1, adress2, adress3, C_Full_name, C_Phone_number," +
-                " Datatime, Distance, summary,  PaymentOperator, Servise_name, " +
-              "Servise_surcharge from Rides r JOIN Driver d ON r.DriverID = d.Driver_ID JOIN Client c ON r.ClientID = c.Client_ID join Payment p on " +
-              "r.PaymentOperator = p.Pay_operator join ExtraServises e on r.ExServise_ID = e.servise_ID where ClientID = " + ClientID.ToString();
+            string CmndLine = "select * from ClientView";
             cmnd = new SqlCommand(CmndLine, connect);
             SqlDataReader reader = cmnd.ExecuteReader();
             DT = new DataTable();
             DT.Load(reader);
             CDataGrid.ItemsSource = DT.DefaultView;
+            TB_Search.Text = null;
         }
 
         private void Btn_Report_Click(object sender, RoutedEventArgs e)
@@ -221,7 +256,7 @@ namespace Kursach.Windows
             while (reader.Read())
             {
                 object num = reader.GetValue(0);
-                RW.Sum = int.Parse(num.ToString());
+                RW.RidesCount = int.Parse(num.ToString());
 
             }
             reader.Close();
@@ -235,7 +270,7 @@ namespace Kursach.Windows
             while (reader.Read())
             {
                 object num = reader.GetValue(0);
-                RW.Sum = int.Parse(num.ToString());
+                RW.DistanceSum = double.Parse(num.ToString());
 
             }
             reader.Close();
@@ -255,7 +290,7 @@ namespace Kursach.Windows
               }
              reader.Close();
 
-            RW.ShowDialog();
+            RW.Show();
 
         }
 

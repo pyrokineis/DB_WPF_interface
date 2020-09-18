@@ -20,18 +20,27 @@ namespace Kursach.Windows
         int summary, Ridescount;
         double dist;
         string str;
+        List<string> infoList = new List<string>();
      
         public int Sum { get { return summary; } set { this.summary = value; } }
         public double DistanceSum { get { return dist; } set { this.dist = value; } }
         public int RidesCount { get { return Ridescount; } set { this.Ridescount = value; } }
+        public List<string> InfoList { get { return infoList; } set { infoList = value; } }
         public ReportWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
         List<string> list = new List<string>();
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            list.AddRange(infoList);
             str = "Всего поездок - " + RidesCount.ToString();
             list.Add(str);
             str = "Общая сумма поездок - " + Sum.ToString() + "р.";

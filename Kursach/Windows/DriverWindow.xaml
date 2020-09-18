@@ -26,9 +26,9 @@
 
             <Separator/>
             <Button x:Name="Btn_Report"  Click="Btn_Report_Click" >
-                <StackPanel Orientation="Horizontal" Width="25">
+                <StackPanel Orientation="Horizontal" Width="50">
 
-                    <TextBlock Text="Stats"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBlock Text="Statistics"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
             

@@ -32,6 +32,7 @@ namespace Kursach
 
             MessageBox.Show("Чтобы войти как Администратор, введите логин и пароль\n" +
                 "Чтобы войти как Клиент, введите номер телефона\n" + "Чтобы войти как Водитель, введите номер прав (с пробелами)");
+            WindowStartupLocation = WindowStartupLocation.CenterScreen; 
         }
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)

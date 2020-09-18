@@ -8,7 +8,7 @@
         Title="AdminWindow" Height="450" Width="780" Loaded="Window_Loaded">
 
    
-    <Grid ShowGridLines="True" >
+    <Grid  >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.30*"  />
             <ColumnDefinition Width="auto"/>
@@ -24,33 +24,40 @@
         
         
         <StackPanel Grid.Column="0" Grid.Row="3"  >
-
-            <Button Name ="Btn_cancel" Content="Cancel" Click="Btn_cancel_Click"/>
-
-            <Button Name="Btn_DeleteRow" Height="30" Click="Btn_DeleteRow_Click"  >
+            <Separator/>
+            <Label Content="Edit menu: "/>
+            <Button Name="Btn_DeleteRow" Height="30" Click="Btn_DeleteRow_Click"  Margin="0,0,0,5"  >
                 <StackPanel Orientation="Horizontal" Width="270">
                     <TextBlock Text="Delete selected row" FontSize="20" VerticalAlignment="Center" Width="180" IsEnabled="False"/>
                 </StackPanel>
             </Button>
+            
             <Button Name="Btn_Update" Height="30" Click="Btn_Update_Click"  >
                 <StackPanel Orientation="Horizontal" Width="270">
                     <TextBlock Text="Update DB" FontSize="20" VerticalAlignment="Center" Width="170" IsEnabled="False"/>
                 </StackPanel>
             </Button>
-            <Button Name="Btn_Report" Height="30" Click="Btn_Report_Click"  >
+            <Separator/>
+            <Label Content="Report menu: "/>
+            <TextBox Name="TB_Report" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <RadioButton Content="Client" Checked="RadioButton_Checked"  Margin="20,0,0,0"/>
+                <RadioButton Content="Driver" Checked="RadioButton_Checked_1" HorizontalAlignment="Right" Margin="20,0,0,0"/>
+            </StackPanel>
+           
+            <Button Name="Btn_Report" Height="30" Click="Btn_Report_Click"   >
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="Form a report" FontSize="20" VerticalAlignment="Center"  IsEnabled="False"/>
                 </StackPanel>
             </Button>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton Content="Client" Checked="RadioButton_Checked"/>
-                <RadioButton Content="Driver" Checked="RadioButton_Checked_1"/>
-            </StackPanel>
-            <TextBox Name="TB_Report"/>
-            <Button Name="Btn_back" Height="90" Click="Btn_back_Click"  >
+          
+           
+            <Separator/>
+            <Button Name="Btn_back"  Click="Btn_back_Click"  >
                 <StackPanel Orientation="Horizontal" Width="270">
 
-                    <TextBlock Text="Exit" FontSize="30" VerticalAlignment="Center" Width="166"/>
+                    <TextBlock Text="Exit" FontSize="20" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -77,17 +84,13 @@
             </ComboBox>
             <TextBox Name="TB_Search" Width="150" />
 
-            <Button x:Name="Btn_Find"  Click="Btn_Find_Click" >
+            <Button x:Name="Btn_Find"  Click="Btn_Find_Click"  Margin="5,0,0,0" >
                 <StackPanel Orientation="Horizontal" Width="25">
 
                     <TextBlock Text="Find"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            <Separator Width="20" Margin="20,0,0,0">
-                <Separator.RenderTransform>
-                    <RotateTransform Angle="90"/>
-                </Separator.RenderTransform>
-            </Separator>
+            <Button Name ="Btn_cancel" Content="Reset" Click="Btn_cancel_Click"  Margin="5,0,0,0"/>
         </StackPanel>
         
         <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">

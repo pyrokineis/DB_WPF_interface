@@ -38,9 +38,9 @@
             <Separator/>
 
             <Button x:Name="Btn_Report"  Click="Btn_Report_Click" >
-                <StackPanel Orientation="Horizontal" Width="25">
+                <StackPanel Orientation="Horizontal" Width="50">
 
-                    <TextBlock Text="Stats"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBlock Text="Statistics"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
             
@@ -61,7 +61,7 @@
         
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" Name="top_SP"  >
         
-            <ComboBox Name="Column_Selection_CB" Grid.Column="1" Grid.Row="1" Width="100"  >
+            <ComboBox Name="Column_Selection_CB" Grid.Column="1" Grid.Row="1" Width="100" >
 
             </ComboBox>
             <TextBox Name="TB_Search" Width="150" />

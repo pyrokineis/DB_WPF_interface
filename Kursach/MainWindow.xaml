@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach"
         mc:Ignorable="d"
-        Title="LogIn Window" Height="300" Width="300" Loaded="Window_Loaded">
+        Title="LogIn Window" Height="300" Width="300" Loaded="Window_Loaded" >
     <Grid>
-        <TextBox x:Name="TBoxLog" HorizontalAlignment="Left" Margin="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <PasswordBox x:Name="TBoxPass" HorizontalAlignment="Left" Margin="140,30,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnEnter" Content="Login" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Click="btnEnter_Click"/>
-        <Button x:Name="btnCancel" Content="Close" HorizontalAlignment="Center" Margin="0,164,0,0" VerticalAlignment="Top" Click="btnCancel_Click" />
-        <Button x:Name="btnRegisterClient" Content="Зарегестрироваться как клиент" HorizontalAlignment="Left" Margin="74,114,0,0" VerticalAlignment="Top" Click="btnRegisterClient_Click"/>
-        <Button x:Name="btnRegisterDriver" Content="Зарегестрироваться как водитель" HorizontalAlignment="Left" Margin="67,139,0,0" VerticalAlignment="Top" Click="btnRegisterDriver_Click"/>
+        <TextBox x:Name="TBoxLog" HorizontalAlignment="Left" Margin="30,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <PasswordBox x:Name="TBoxPass" HorizontalAlignment="Left" Margin="155,39,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnEnter" Content="Войти" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" Click="btnEnter_Click" RenderTransformOrigin="0.657,-0.342" Width="60"/>
+        <Button x:Name="btnCancel" Content="Закрыть" HorizontalAlignment="Center" Margin="0,155,0,0" VerticalAlignment="Top" Click="btnCancel_Click" Width="60" />
+        <Button x:Name="btnRegisterClient" Content="Зарегестрироваться как клиент" HorizontalAlignment="Center" Margin="0,96,0,0" VerticalAlignment="Top" Click="btnRegisterClient_Click" Width="189"/>
+        <Button x:Name="btnRegisterDriver" Content="Зарегестрироваться как водитель" HorizontalAlignment="Center" Margin="0,122,0,0" VerticalAlignment="Top" Click="btnRegisterDriver_Click"/>
+        <Label Content="Логин:" HorizontalAlignment="Left" Margin="30,8,0,0" VerticalAlignment="Top"/>
+        <Label Content="Пароль:" HorizontalAlignment="Left" Margin="155,10,0,0" VerticalAlignment="Top"/>
 
 
     </Grid>

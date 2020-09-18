@@ -30,6 +30,7 @@ namespace Kursach
         public RegistrationWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
 
@@ -94,14 +95,13 @@ namespace Kursach
         {
             try
             {
-
                 if (Driver_Grid.Visibility == Visibility.Visible)
                 {
                     if (DriverFIO_TB.Text != null & DriverPhone_TB.Text.Length == 11 & DriverAuto_TB.Text!=null & CarPlate_TB.Text.Length==6 & CarLicense_TB.Text.Length==12 )
                     {
                         try
                         {
-                            long.Parse(DriverPhone_TB.Text);
+                            int.Parse(DriverPhone_TB.Text);
                         }
 
                         catch
