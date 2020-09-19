@@ -162,7 +162,7 @@ namespace Kursach
                         adapter.UpdateCommand = cmnd;
 
                         //del
-                        cmnd = new SqlCommand("delete from Driver_ID where Driver_ID=@Driver_ID", connect);
+                        cmnd = new SqlCommand("delete from Driver where Driver_ID=@Driver_ID", connect);
                         cmnd.Parameters.Add("@Driver_ID", SqlDbType.Int, 6, "Driver_ID");
                         parameter.SourceVersion = DataRowVersion.Original;
                         adapter.DeleteCommand = cmnd;
@@ -216,8 +216,8 @@ namespace Kursach
 
 
                         //update
-                        cmnd = new SqlCommand("update ExtraServises set Servise_ID=@Servise_ID, Servise_Name=@Servise_Name, Servise_Surcharge=@Servise_Surcharge where @prevServise_ID=Servise_ID",connect);
-                        cmnd.Parameters.Add("@Servise_ID", SqlDbType.Int, 6, "Servise_ID");
+                        cmnd = new SqlCommand("update ExtraServises set Servise_Name=@Servise_Name, Servise_Surcharge=@Servise_Surcharge where @prevServise_ID=Servise_ID",connect);
+                        //cmnd.Parameters.Add("@Servise_ID", SqlDbType.Int, 6, "Servise_ID");
                         cmnd.Parameters.Add("@Servise_Name", SqlDbType.NVarChar, 50, "Servise_Name");
                         cmnd.Parameters.Add("@Servise_Surcharge", SqlDbType.Int, 6, "Servise_Surcharge");
                         SqlParameter parameter = cmnd.Parameters.Add("prevServise_ID", SqlDbType.Int,6,"Servise_ID");
@@ -252,7 +252,7 @@ namespace Kursach
                         parameter.SourceVersion = DataRowVersion.Original;
                         adapter.UpdateCommand = cmnd;
                         //del
-                        cmnd = new SqlCommand("delete from Payment where Pay_Operator=@Pay_Oerator",connect);
+                        cmnd = new SqlCommand("delete from Payment where Pay_Operator=@Pay_Operator",connect);
                         parameter = cmnd.Parameters.Add("@Pay_Operator",SqlDbType.NVarChar,100,"Pay_Operator");
                         parameter.SourceVersion = DataRowVersion.Original;
                         adapter.DeleteCommand = cmnd;
@@ -282,7 +282,7 @@ namespace Kursach
 
                         //del
                         cmnd = new SqlCommand("delete from AutoClass where Class_ID=@Class_ID", connect);
-                        parameter = cmnd.Parameters.Add("@ClassID", SqlDbType.Int, 6, "Class_ID");
+                        parameter = cmnd.Parameters.Add("@Class_ID", SqlDbType.Int, 6, "Class_ID");
                         parameter.SourceVersion = DataRowVersion.Original;
                         adapter.DeleteCommand = cmnd;
                     }

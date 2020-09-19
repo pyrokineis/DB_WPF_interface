@@ -37,7 +37,7 @@ namespace Kursach
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
-            if (TBoxLog.Text.Length ==0 /*|| TBoxPass.Password.Length == 0*/)
+            if ( TBoxLog.Text==null)
             {
                 MessageBox.Show("Введите данные");
             }
