@@ -70,7 +70,7 @@ namespace Kursach.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            mainWindow.Visibility = Visibility.Collapsed;
+            mainWindow.Visibility = Visibility.Hidden;
             
 
             SqlCommand ClientView = new SqlCommand("create view ClientView as select adress1, adress2, adress3, D_Full_name, D_Phone_number, Auto_model, Auto_plate," +
@@ -440,6 +440,7 @@ namespace Kursach.Windows
         private void Btn_Back_Click(object sender, RoutedEventArgs e)
         {
             Close();
+            mainWindow.Visibility = Visibility.Visible;
         }
     }
 }

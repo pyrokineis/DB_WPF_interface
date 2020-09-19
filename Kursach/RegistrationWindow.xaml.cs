@@ -47,10 +47,13 @@ namespace Kursach
                 {
                     if (ClientFIO_TB.Text != null & ClientPhone_TB.Text.Length == 11 & ClientAge_TB.Text != null)
                     {
+
+                        if (int.Parse(ClientAge_TB.Text) > 110)
+                            throw new Exception();
                         try
                         {
                             int.Parse(ClientAge_TB.Text);
-                            int.Parse(ClientPhone_TB.Text);
+                            long.Parse(ClientPhone_TB.Text);
                         }
 
                         catch
@@ -101,7 +104,7 @@ namespace Kursach
                     {
                         try
                         {
-                           // int.Parse(DriverPhone_TB.Text);
+                           long.Parse(DriverPhone_TB.Text);
                         }
 
                         catch
