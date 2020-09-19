@@ -52,9 +52,9 @@ namespace Kursach.Windows
         SqlDataReader reader;
         Client client;
         DataTable DT;
-        int rDriver, driverCount, DriverID, serviseID,classID, ridesID;
+        int rDriver, driverCount, serviseID,classID, ridesID;
         ComboBoxItem CBi;
-        string payOperator,payType;
+        string payOperator, payType, DriverID;
 
         List<string> CtTableStrings = new List<string> {  "Adress1", "Adress2", "Adress3", "D_Full_name", "D_Phone_number", "Auto_model", "Auto_plate", "Datatime","Distance", "Summary",  "PaymentOperator", "Servise_name", "Servise_surcharge"};
         List<string> DriversIDs = new List<string> { };
@@ -83,10 +83,8 @@ namespace Kursach.Windows
 
             ClientView.ExecuteNonQuery();
 
-
             string CmndLine = "select * from ClientView";
             cmnd = new SqlCommand(CmndLine, connect);
-
 
             SqlDataReader reader = cmnd.ExecuteReader();
             DT = new DataTable();
@@ -109,6 +107,12 @@ namespace Kursach.Windows
             TableGrid.Visibility = Visibility.Hidden;
             top_SP.Visibility = Visibility.Hidden;
             top_SP2.Visibility = Visibility.Hidden;
+            Adress1_TB.Text = null;
+            Adress2_TB.Text = null;
+            Adress3_TB.Text = null;
+            AutoClass_TB.SelectedItem = null;
+            ExtraServ_CB.SelectedItem = null;
+            PayType_CB.SelectedItem = null;
 
             cmnd = new SqlCommand("select Driver_ID from Driver",connect);
             reader = cmnd.ExecuteReader();
@@ -296,14 +300,13 @@ namespace Kursach.Windows
 
         private void PlaceOrder_Click(object sender, RoutedEventArgs e)
         {
-            //адр123, дист, сумма, дата, айдди вод, айди кл, оп опл, класс авто, доп усл
-
-            //обн цены
+         
             if (OrderGrid.Visibility == Visibility.Visible)
             {
                 driverCount = DriversIDs.Count;
                 Random r = new Random();
-                DriverID = r.Next(driverCount);
+                int i = r.Next(driverCount);
+                DriverID = DriversIDs[i];
 
               
 
@@ -409,7 +412,17 @@ namespace Kursach.Windows
                         cmnd.ExecuteNonQuery();
                         MessageBox.Show("Заказ создан");
                         TableGrid.Visibility = Visibility.Visible;
+                        top_SP.Visibility = Visibility.Visible;
+                        top_SP2.Visibility = Visibility.Visible;
                         OrderGrid.Visibility = Visibility.Hidden;
+
+                        string CmndLine = "select * from ClientView";
+                        cmnd = new SqlCommand(CmndLine, connect);
+                        SqlDataReader reader = cmnd.ExecuteReader();
+                        DT = new DataTable();
+                        DT.Load(reader);
+                        CDataGrid.ItemsSource = DT.DefaultView;
+                        TB_Search.Text = null;
                     }
 
                     catch (Exception ex)
@@ -421,6 +434,7 @@ namespace Kursach.Windows
 
                 }
             }
+           
         }
 
         private void Btn_Back_Click(object sender, RoutedEventArgs e)

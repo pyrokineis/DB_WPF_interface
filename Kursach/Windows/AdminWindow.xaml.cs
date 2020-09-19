@@ -806,11 +806,9 @@ namespace Kursach
                                 }
                                 reader.Close();
                             }
-                            break;
-                            
+                            break; 
                     }
                     RW.ShowDialog();
-
                 }
            }
            
