@@ -1,18 +1,10 @@
-﻿using System;
+﻿using Kursach.Windows;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Data;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
-using System.Data;
-using System.Configuration;
-using Kursach.Windows;
 
 namespace Kursach
 {
@@ -140,7 +132,7 @@ namespace Kursach
                         //ins
                         cmnd = new SqlCommand("insert into Driver (D_Full_name, Auto_model, Auto_plate, D_Phone_number,Licence_number) values " +
                             "(@D_Full_name, @Auto_model, @Auto_plate, @D_Phone_number, @Licence_number)", connect);
-                      //  cmnd.Parameters.Add("@Driver_ID",SqlDbType.Int,6,"Driver_ID");
+                    
                         cmnd.Parameters.Add("@D_Full_name",SqlDbType.NVarChar,100, "D_Full_name");
                         cmnd.Parameters.Add("@Auto_model",SqlDbType.NVarChar,100, "Auto_model");
                         cmnd.Parameters.Add("@Auto_plate",SqlDbType.NVarChar,10, "Auto_plate");
@@ -151,7 +143,7 @@ namespace Kursach
                         //upd
                         cmnd = new SqlCommand("update Driver set D_Full_name=@D_Full_name, Auto_model=@Auto_model, Auto_plate=@Auto_plate, D_Phone_number=@D_Phone_number, Licence_number=@Licence_number where Driver_ID=@prevDriver_ID",connect);
 
-                        //cmnd.Parameters.Add("@Driver_ID", SqlDbType.Int, 6, "Driver_ID");
+                   
                         cmnd.Parameters.Add("@D_Full_name", SqlDbType.NVarChar, 100, "D_Full_name");
                         cmnd.Parameters.Add("@Auto_model", SqlDbType.NVarChar, 100, "Auto_model");
                         cmnd.Parameters.Add("@Auto_plate", SqlDbType.NVarChar, 10, "Auto_plate");
@@ -177,7 +169,7 @@ namespace Kursach
                         //ins
                         cmnd = new SqlCommand("insert into Client (C_Full_name, C_Age, C_Phone_number) values " +
                             "(@C_Full_name, @C_Age, @C_Phone_number)", connect);
-                        //cmnd.Parameters.Add("@Client_ID", SqlDbType.Int, 6, "Client_ID");
+   
                         cmnd.Parameters.Add("@C_Full_name", SqlDbType.NVarChar, 70, "C_Full_name");
                         cmnd.Parameters.Add("@C_Age",SqlDbType.Int,6,"C_Age");
                         cmnd.Parameters.Add("@C_Phone_number", SqlDbType.NVarChar, 20, "C_Phone_number");
@@ -186,7 +178,7 @@ namespace Kursach
 
                         //upd
                         cmnd = new SqlCommand("update Client set C_Full_name=@C_Full_name, C_Age=@C_Age, C_Phone_number=@C_Phone_number where Client_ID=@prevClient_ID", connect);
-                        //cmnd.Parameters.Add("@Client_ID", SqlDbType.Int, 6, "Client_ID");
+                  
                         cmnd.Parameters.Add("@C_Full_name", SqlDbType.NVarChar, 70, "C_Full_name");
                         cmnd.Parameters.Add("@C_Age", SqlDbType.Int, 6, "C_Age");
                         cmnd.Parameters.Add("@C_Phone_number", SqlDbType.NVarChar, 20, "C_Phone_number");
@@ -209,7 +201,7 @@ namespace Kursach
 
                         //ins
                         cmnd = new SqlCommand("insert into ExtraServises (Servise_Name, Servise_Surcharge) values (@Servise_Name, @Servise_Surcharge)",connect);
-                        //cmnd.Parameters.Add("@Servise_ID",SqlDbType.Int,6, "Servise_ID");
+                     
                         cmnd.Parameters.Add("@Servise_Name",SqlDbType.NVarChar,50, "Servise_Name");
                         cmnd.Parameters.Add("@Servise_Surcharge",SqlDbType.Int,6, "Servise_Surcharge");
                         adapter.InsertCommand = cmnd;
@@ -217,7 +209,7 @@ namespace Kursach
 
                         //update
                         cmnd = new SqlCommand("update ExtraServises set Servise_Name=@Servise_Name, Servise_Surcharge=@Servise_Surcharge where @prevServise_ID=Servise_ID",connect);
-                        //cmnd.Parameters.Add("@Servise_ID", SqlDbType.Int, 6, "Servise_ID");
+                
                         cmnd.Parameters.Add("@Servise_Name", SqlDbType.NVarChar, 50, "Servise_Name");
                         cmnd.Parameters.Add("@Servise_Surcharge", SqlDbType.Int, 6, "Servise_Surcharge");
                         SqlParameter parameter = cmnd.Parameters.Add("prevServise_ID", SqlDbType.Int,6,"Servise_ID");
@@ -266,13 +258,13 @@ namespace Kursach
                         adapter.SelectCommand = new SqlCommand("seleсt * from AutoClass(Class_ID,Class_Name,Coef)",connect);
                         //ins
                         cmnd = new SqlCommand("insert into AutoClass (Class_Name,Coef) values (@Class_name, @Coef)", connect);
-                        //cmnd.Parameters.Add("@Class_ID",SqlDbType.Int,6, "Class_ID");
+                      
                         cmnd.Parameters.Add("@Class_Name",SqlDbType.NVarChar,20, "Class_Name");
                         cmnd.Parameters.Add("@Coef",SqlDbType.Int,6, "Coef");
                         adapter.InsertCommand = cmnd;
                         //upd
                         cmnd = new SqlCommand("update AutoClass set Class_Name=@Class_Name, Coef=@Coef where @prevClass_ID=Class_ID", connect);
-                       // cmnd.Parameters.Add("@Class_ID", SqlDbType.Int, 6, "Class_ID");
+             
                         cmnd.Parameters.Add("@Class_Name", SqlDbType.NVarChar, 20, "Class_Name");
                         cmnd.Parameters.Add("@Coef", SqlDbType.Int, 6, "Coef");
                         SqlParameter parameter = cmnd.Parameters.Add("@prevClass_ID",SqlDbType.Int,6, "Class_ID");
@@ -818,9 +810,6 @@ namespace Kursach
         {
             Close();
             mainWindow.Visibility = Visibility.Visible;
-
         }
-
-
     }
 }

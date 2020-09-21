@@ -62,14 +62,8 @@
             </Button>
 
             <Button Name ="Btn_cancel" Content="Cancel" Click="Btn_cancel_Click" Margin="5,0,0,0"/>
-           
+
         </StackPanel>
-
-        <Grid Name="OrderGrid">
-            <StackPanel>
-
-            </StackPanel>
-        </Grid>
 
         <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Name="TableGrid">
 

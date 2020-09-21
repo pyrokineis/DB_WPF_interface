@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Data;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
-using System.Data;
-using System.Configuration;
 
 namespace Kursach.Windows
 {
@@ -20,37 +12,12 @@ namespace Kursach.Windows
     /// </summary>
     public partial class ClientWindow : Window
     {
-        class Client
-        {
-            public string ID { get; }
-            public string FIO { get; }
-            public string Age { get; }
-            public string Number { get; }
-
-            public Client(string id, string fio, string age, string number)
-            {
-                ID = id;
-                FIO = fio;
-                Age = age;
-                Number = number;
-            }
-            public Client(string id)
-            {
-                ID = id;
-            }
-            static List<string> GetInfo()
-            {
-                List<string> Info = new List<string>();
-
-                return Info;
-            }
-        }
+  
         public MainWindow mainWindow { get; set; }
         public int ClientID { get; set; }
         public SqlConnection connect { get; set; }
         SqlCommand cmnd, cmndFind, cmndDrop;
         SqlDataReader reader;
-        Client client;
         DataTable DT;
         int rDriver, driverCount, serviseID,classID, ridesID;
         ComboBoxItem CBi;

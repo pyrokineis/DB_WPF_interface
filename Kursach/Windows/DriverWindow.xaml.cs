@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
 using System.Data;
-using System.Configuration;
+using System.Data.SqlClient;
+using System.Windows;
 
 namespace Kursach.Windows
 {
@@ -21,23 +12,6 @@ namespace Kursach.Windows
     public partial class DriverWindow : Window
     {
         public MainWindow mainWindow { get; set; }
-        class Driver
-        {
-            public string ID { get; set; }
-            public string FIO { get; set; }
-            public string Car { get; set; }
-            public string CarPlate { get; set; }
-            public string Licence { get; set; }
-
-            public Driver(string id, string fio, string car, string carplate, string licence)
-            {
-                ID = id; FIO = fio; Car = car; CarPlate = carplate; Licence = licence;
-            }
-            public Driver(string id)
-            {
-                ID = id;
-            }
-        }
         public int DriverID {get;set;}
 
         public SqlConnection connect = new SqlConnection();
@@ -45,8 +19,7 @@ namespace Kursach.Windows
         SqlDataReader reader;
         Driver driver;
         DataTable DT;
-        List<string> DrTableStrings = new List<string> { "Driver_ID", "D_Full_name", "Auto_model", "Auto_plate", "D_Phone_Number", "Licence_number" };
-      
+        List<string> DrTableStrings = new List<string> { "Adress1", "Adress2", "Adress3", "C_Full_name", "C_Phone_number", " Datatime", "Distance", "summary",  "PaymentOperator", "Servise_name", "Servise_surcharge" };
 
         public DriverWindow()
         {
@@ -97,7 +70,7 @@ namespace Kursach.Windows
             DDataGrid.ItemsSource = DT.DefaultView;
         }
 
-        private void Btn_Find_Click(object sender, RoutedEventArgs e)  ///yyyyyyy blya
+        private void Btn_Find_Click(object sender, RoutedEventArgs e) 
         {
             if (Column_Selection_CB.SelectedItem != null)
             {
@@ -150,8 +123,8 @@ namespace Kursach.Windows
                             cmndFind = new SqlCommand($"select * from DriverView where Servise_surcharge like '%{TB_Search.Text.ToString()}%' ");
                             break;
                     }
-                    cmnd.Connection = connect;
-                    SqlDataReader reader = cmnd.ExecuteReader();
+                    cmndFind.Connection = connect;
+                    SqlDataReader reader = cmndFind.ExecuteReader();
                     DataTable FDT = new DataTable();
                     FDT.Load(reader);
                     DDataGrid.ItemsSource = FDT.DefaultView;
@@ -160,7 +133,6 @@ namespace Kursach.Windows
             }
 
         }
-
         private void Btn_Report_Click(object sender, RoutedEventArgs e)
         {
             ReportWindow RW = new ReportWindow();
